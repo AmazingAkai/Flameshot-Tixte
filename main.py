@@ -8,6 +8,10 @@ import sys
 import pyperclip
 import requests
 
+path = os.path.abspath(__file__)
+file_name = "config.json"
+file_path = os.path.join(os.path.dirname(path), file_name)
+
 
 class UploadError(Exception):
     """An exception raised when the file fails to upload"""
@@ -49,8 +53,8 @@ def get_filename(url: str) -> str:
 
 def main():
     url = "https://api.tixte.com/v1/upload"
-    if os.path.isfile("./config.json"):
-        with open("./config.json", "r") as file:
+    if os.path.isfile(file_path):
+        with open(file_path, "r") as file:
             data = json.load(file)
             authorization = data.get("authorization")
             domain = data.get("domain")
