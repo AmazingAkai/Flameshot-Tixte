@@ -47,43 +47,49 @@ def get_filename(url: str) -> str:
     return filename
 
 
-if __name__ == "__main__":
+def main():
     url = "https://api.tixte.com/v1/upload"
     if os.path.isfile("config.json"):
         with open("config.json", "r") as file:
             data = json.load(file)
-            authorization = data["authorization"]
-            domain = data["domain"]
-        filename = get_filename(f"https://{domain}")
+            authorization = data.get("authorization")
+            domain = data.get("domain")
 
-        success = False
-        for _ in range(5):
-            try:
-                upload_to_server(url, authorization, filename, domain)
-                success = True
-                break
-            except UploadError:
-                pass
+        if authorization and domain:
+            filename = get_filename(f"https://{domain}")
 
-        if success:
-            subprocess.call(
-                [
-                    "notify-send",
-                    "Successfully Uploaded",
-                    "Successfully uploaded image and copied the url to clipboard.",
-                ]
-            )
+            success = False
+            for _ in range(5):
+                try:
+                    upload_to_server(url, authorization, filename, domain)
+                    success = True
+                    break
+                except UploadError:
+                    pass
 
+            if success:
+                subprocess.call(
+                    [
+                        "notify-send",
+                        "Successfully Uploaded",
+                        "Successfully uploaded image and copied the URL to clipboard.",
+                    ]
+                )
+            else:
+                subprocess.call(
+                    [
+                        "notify-send",
+                        "Failed To Upload",
+                        "Failed to upload the image to Tixte.",
+                    ]
+                )
         else:
-            subprocess.call(
-                [
-                    "notify-send",
-                    "Failed To Upload",
-                    "Failed to upload the image to tixte.",
-                ]
-            )
-
+            print("Invalid authorization or domain in the configuration file.")
     else:
         print(
-            "No configuration file found, make sure to create a config.json with authorization and domain."
+            "No configuration file found. Make sure to create a config.json with authorization and domain."
         )
+
+
+if __name__ == "__main__":
+    main()
