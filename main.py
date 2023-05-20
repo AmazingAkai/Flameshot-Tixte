@@ -49,8 +49,8 @@ def get_filename(url: str) -> str:
 
 def main():
     url = "https://api.tixte.com/v1/upload"
-    if os.path.isfile("config.json"):
-        with open("config.json", "r") as file:
+    if os.path.isfile("./config.json"):
+        with open("./config.json", "r") as file:
             data = json.load(file)
             authorization = data.get("authorization")
             domain = data.get("domain")
