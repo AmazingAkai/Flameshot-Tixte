@@ -12,7 +12,7 @@ Before using the Flameshot-Tixte script, you need to perform the following steps
 git clone https://github.com/AmazingAkai/Flameshot-Tixte
 ```
 
-2. Install a copy-paste mechanism like xclip, as it is required by the pyperclip library. You can find instructions on how to install xclip [here](https://pyperclip.readthedocs.io/en/latest/index.html#not-implemented-error).
+2. Install a copy-paste mechanism like xclip, as it is required by the pyperclip library. You can find instructions on how to install xclip or supported copy-paste mechanism [here](https://pyperclip.readthedocs.io/en/latest/index.html#not-implemented-error).
 
 3. Navigate to the Flameshot-Tixte directory:
 
@@ -35,7 +35,7 @@ pip install -r requirements.txt
 }
 ```
 
-Replace **YOUR_AUTHORIZATION_KEY** with your Tixte authorization key, and \*\*YOUR_DOMAIN with your desired domain on Tixte.
+Replace **YOUR_AUTHORIZATION_KEY** with your Tixte authorization key, and **YOUR_DOMAIN** with your desired domain on Tixte.
 
 6. Install Flameshot if you haven't already. You can install Flameshot using your package manager.
 
@@ -59,10 +59,16 @@ flameshot gui -r | python path/to/Flameshot-Tixte/main.py
 
 # Shortcut Key
 
+- Make the `screenshot.sh` file executable using the following command:
+
+```bash
+chmod +x screenshot.sh
+```
+
 - You can create a shortcut key to execute the Flameshot-Tixte command. Set up a custom shortcut in your desktop environment's settings and assign the following command:
 
 ```bash
-flameshot gui -r | python path/to/Flameshot-Tixte/main.py
+/path/to/Flameshot-Tixte/screenshot.sh
 ```
 
-- Remember to replace path/to/Flameshot-Tixte with the actual path to the Flameshot-Tixte directory.
+- Remember to replace `path/to/Flameshot-Tixte` with the actual path to the Flameshot-Tixte directory.
